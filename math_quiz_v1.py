@@ -1,8 +1,17 @@
 import random
 
 # Initialise variables
-correct = [0]
-incorrect = [0]
+correct = 0
+incorrect = 0
+
+
+# Styles
+class Styles:
+    red = "\033[91m"
+    green = "\033[92m"
+    reset = "\033[0m"
+    bold_underline = "\033[1m\033[4m"
+
 
 # String checker
 def string_checker(question, valid_ans=("yes", "no")):
@@ -28,14 +37,9 @@ def string_checker(question, valid_ans=("yes", "no")):
 
 
 # Define the instructions
-def instruction():
-    print('''
-**** Instructions ****
+def instructions():
+    print(f"{Styles.bold_underline}Instructions{Styles.reset}")
 
-Do something
-and then do something else
-etc
-    ''')
 
 # Generate numbers and answer for multiplication
 def gen_multi():
@@ -44,15 +48,25 @@ def gen_multi():
     ans = a * b
     return a, b, ans
 
+
+print("Welcome to Multiplication Quiz")
+want_instructions = string_checker("Would you like to read the instructions?")
+if want_instructions == "yes":
+    instructions()
+
+
 # Game :D
 while True:
     a, b, ans = gen_multi()
-    print(f"What is {a} * {b}")
+    print(f"\nWhat is {a} * {b}")
+    print(ans)
     user_ans = input("Your answer: ")
     user_ans = int(user_ans)
 
     if user_ans == ans:
         correct += 1
-    elif user_ans != ans:
+        print(f"You were {Styles.green}correct!{Styles.reset}")
+    else:
         incorrect += 1
-        
+        print(f"{Styles.red}Incorrect{Styles.reset}. The correct answer was {Styles.green}{ans}{Styles.reset}")
+    print(Styles.green, correct, Styles.red,  incorrect, Styles.reset)
