@@ -105,15 +105,17 @@ if begin == "yes":
             print(f"You were {Styles.green}correct!{Styles.reset}")
         else:
             incorrect += 1
-            print(
-                f"You were {Styles.red}Incorrect{Styles.reset}. The correct answer was {Styles.green}{ans}{Styles.reset}")
-        print(Styles.green, correct, Styles.red, incorrect, Styles.reset, rounds_played)
+            print(f"You were {Styles.red}Incorrect{Styles.reset}. The correct answer was {Styles.green}{ans}{Styles.reset}")
         rounds_played += 1
+        print(Styles.green, correct, Styles.red, incorrect, Styles.reset, rounds_played)
 
     # Stats (calc and print)
     if rounds_played > 0:
         percent_correct = correct / rounds_played * 100
-        percent_lost = 100 - percent_correct
+        percent_incorrect = 100 - percent_correct
+        # Round numbers to 2 decimal points
+        percent_correct_rounded = round(percent_correct, 2)
+        percent_incorrect_rounded = round(percent_incorrect, 2)
         want_stats = string_checker("Do you want to see your stats?")
         if want_stats == "yes":
-            print(f"Correct: {percent_correct}% \n Incorrect: {percent_lost}%")
+            print(f"{Styles.green}Correct: {percent_correct_rounded}%\n{Styles.red}Incorrect: {percent_incorrect_rounded}%" + Styles.reset)
