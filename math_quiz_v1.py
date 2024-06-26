@@ -38,6 +38,7 @@ def string_checker(question, valid_ans=("yes", "no")):
         print()
 
 
+# Checks if input is an integer bigger than 0
 def int_checker(question):
     while True:
 
