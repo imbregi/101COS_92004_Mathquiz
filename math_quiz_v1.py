@@ -4,7 +4,7 @@ import random
 correct = 0
 incorrect = 0
 rounds_played = 0
-
+yes_no = ["yes", "no"]
 
 # Adds styles/colours
 class Styles:
@@ -16,7 +16,7 @@ class Styles:
 
 
 # String checker
-def string_checker(question, valid_ans=("yes", "no")):
+def string_checker(question, valid_ans):
     error = f"Please enter a valid option from the following list: {valid_ans}"
 
     while True:
@@ -79,17 +79,20 @@ def gen_multi():
 
 # Asks user if they want to read the instructions
 print(Styles.red + f"XXX {Styles.blue}Welcome to Multiplication Quiz {Styles.red}XXX" + Styles.reset)
-want_instructions = string_checker("Would you like to read the instructions?(y/n)")
+want_instructions = string_checker("Would you like to read the instructions?(y/n)", yes_no)
 if want_instructions == "yes":
     instructions()
 
 # Game :D
-begin = string_checker("Would you like to begin?")
+begin = string_checker("Would you like to begin?", yes_no)
 if begin == "yes":
     while True:
         # Asks user math question
         a, b, ans = gen_multi()
-        print(f"\nWhat is {a} * {b}?")
+        print(f"\nRound {rounds_played +1}")
+        if rounds_played == 420:
+            print("🌱💨")
+        print(f"What is {a} * {b}?")
         print(ans)
         user_ans = int_checker("Your answer: ")
 
@@ -108,7 +111,7 @@ if begin == "yes":
             incorrect += 1
             print(f"You were {Styles.red}Incorrect{Styles.reset}. The correct answer was {Styles.green}{ans}{Styles.reset}")
         rounds_played += 1
-        print(f"Correct:{Styles.green}{correct}{Styles.reset} Incorrect:{Styles.red}{incorrect}{Styles.reset} Played: {rounds_played}")
+        print(f"{Styles.green}Correct:{correct}{Styles.reset} {Styles.red}Incorrect:{incorrect}{Styles.reset} Played: {rounds_played}")
 
     # Stats (calc and print)
     if rounds_played > 0:
@@ -118,6 +121,11 @@ if begin == "yes":
         percent_correct_rounded = round(percent_correct, 2)
         percent_incorrect_rounded = round(percent_incorrect, 2)
         # Asks user if they want their stats and prints them
-        want_stats = string_checker("Do you want to see your stats?")
+        want_stats = string_checker("Do you want to see your stats?", yes_no)
         if want_stats == "yes":
             print(f"{Styles.green}Correct: {percent_correct_rounded}%\n{Styles.red}Incorrect: {percent_incorrect_rounded}%" + Styles.reset)
+    else:
+        print("Try playing at least one round")
+
+
+

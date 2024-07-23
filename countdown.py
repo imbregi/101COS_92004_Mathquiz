@@ -11,4 +11,4 @@ def countdown(seconds):
             break
 
 
-countdown(10)
+countdown(3)
