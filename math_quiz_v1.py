@@ -6,6 +6,7 @@ incorrect = 0
 rounds_played = 0
 yes_no = ["yes", "no"]
 
+
 # Adds styles/colours
 class Styles:
     red = "\033[91m"
